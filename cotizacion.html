@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cotización - Constructora</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER SUPERIOR -->
+  <header class="header">
+    <div class="logo">
+      <img src="img/Union.png" alt="Logo">
+    </div>
+    <nav>
+      <ul class="nav-list">
+        <li><a href="index.html"><span>Inicio</span></a></li>
+        <li><a href="nosotros.html"><span>Nosotros</span></a></li>
+        <li><a href="servicios.html"><span>Servicios</span></a></li>
+        <li><a href="portafolio.html"><span>Portafolio</span></a></li>
+        <li><a href="cotizacion.html" class="btn-inicio"><span>Cotización</span></a></li>
+        <li><a href="contacto.html"><span>Contacto</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- SEGUNDA BARRA -->
+  <nav class="second-nav">
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="portafolio.html">Portafolio</a></li>
+      <li><a href="cotizacion.html" class="btn-inicio">Cotización</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+    <div class="indicator"></div>
+  </nav>
+
+  <!-- SECCIÓN COTIZACIÓN -->
+  <section class="cotizacion">
+    <div class="cotizacion-imagenes">
+      <img src="img/proyecto1.png" class="active" alt="Proyecto 1">
+      <img src="img/proyecto2.png" alt="Proyecto 2">
+      <img src="img/proyecto3.png" alt="Proyecto 3">
+    </div>
+
+    <div class="cotizacion-formulario">
+      <h2>Solicita tu cotización</h2>
+      <form action="mailto:menalvgue@gmail.com" method="post" enctype="text/plain">
+        <label>Nombre completo:</label>
+        <input type="text" name="nombre" required>
+
+        <label>Teléfono:</label>
+        <input type="tel" name="telefono" required>
+
+        <label>Correo electrónico:</label>
+        <input type="email" name="correo" required>
+
+        <label>Tipo de servicio:</label>
+        <select name="tipo_servicio" required>
+          <option value="">Seleccione una opción</option>
+          <option value="construccion">Construcción</option>
+          <option value="instalacion">Instalación</option>
+          <option value="acabado">Acabado</option>
+          <option value="servicios_complementarios">Servicios complementarios</option>
+          <option value="remodelacion_mantenimiento">Remodelación y mantenimiento</option>
+          <option value="servicios_profesionales">Servicios profesionales</option>
+        </select>
+
+        <label>Mensaje / Requerimientos:</label>
+        <textarea name="mensaje" rows="6" required></textarea>
+
+        <button type="submit">Enviar cotización</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- SCRIPT DEL INDICADOR DE MENÚ -->
+  <script>
+    const indicator = document.querySelector('.indicator');
+    const links = document.querySelectorAll('.second-nav ul li a');
+
+    links.forEach(link => {
+      link.addEventListener('mouseenter', function() {
+        const rect = this.getBoundingClientRect();
+        const navRect = this.closest('.second-nav').getBoundingClientRect();
+        indicator.style.width = rect.width + 'px';
+        indicator.style.left = (rect.left - navRect.left) + 'px';
+        indicator.style.opacity = 1;
+      });
+
+      link.addEventListener('mouseleave', function() {
+        indicator.style.opacity = 0;
+      });
+    });
+
+    // SLIDER AUTOMÁTICO DE IMÁGENES
+    let index = 0;
+    const imagenes = document.querySelectorAll('.cotizacion-imagenes img');
+
+    setInterval(() => {
+      imagenes[index].classList.remove('active');
+      index = (index + 1) % imagenes.length;
+      imagenes[index].classList.add('active');
+    }, 4000);
+  </script>
+
+</body>
+</html>
